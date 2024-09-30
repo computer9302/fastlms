@@ -2,9 +2,13 @@ package com.zerobase.fastlms.member.entity;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
-import lombok.Data;
+import lombok.*;
+
 import java.time.LocalDateTime;
 
+@AllArgsConstructor
+@NoArgsConstructor
+@Builder
 @Entity
 @Data
 public class Member {
@@ -16,4 +20,9 @@ public class Member {
     private String phone;
     private String password;
     private LocalDateTime regDt;
+
+    private boolean emailAuthYn;
+    private LocalDateTime emailAuthDt;
+    private String emailAuthKey;
+
 }
