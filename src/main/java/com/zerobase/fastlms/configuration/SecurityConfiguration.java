@@ -12,6 +12,7 @@ import org.springframework.security.config.annotation.web.configurers.AbstractHt
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
 @RequiredArgsConstructor
 @EnableWebSecurity
@@ -37,6 +38,7 @@ public class SecurityConfiguration{
                         .requestMatchers("/"
                                 ,"/member/register"
                                 ,"/member/email-auth"
+                                , "/member/login"
                         ).permitAll()
                         .anyRequest().authenticated())
                 .securityMatcher("/**");
@@ -45,6 +47,13 @@ public class SecurityConfiguration{
                 .loginPage("/member/login")
                 .failureHandler(getFailureHandler())
                 .permitAll());
+
+        http.logout(logout -> logout
+                .logoutRequestMatcher(new AntPathRequestMatcher("/member/logout"))
+                .logoutSuccessUrl("/")
+                .invalidateHttpSession(true)
+                .deleteCookies("JSESSIONID")
+        );
 
         return http.build();
 

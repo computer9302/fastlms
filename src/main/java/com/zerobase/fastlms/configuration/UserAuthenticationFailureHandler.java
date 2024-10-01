@@ -8,6 +8,7 @@ import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.web.authentication.SimpleUrlAuthenticationFailureHandler;
 
 import java.io.IOException;
+import java.net.URLEncoder;
 
 public class UserAuthenticationFailureHandler extends SimpleUrlAuthenticationFailureHandler {
 
@@ -20,9 +21,9 @@ public class UserAuthenticationFailureHandler extends SimpleUrlAuthenticationFai
             msg = exception.getMessage();
         }
 
-        setUseForward(true);
-        setDefaultFailureUrl("/member/login?error=true");
-        request.setAttribute("errorMessage", msg);
+        setUseForward(false);
+        String redirectUrl = "/member/login?error=true&errorMessage=" + URLEncoder.encode(msg, "UTF-8");
+        response.sendRedirect(redirectUrl);
 
         System.out.println("로그인에 실패하였습니다.");
 
