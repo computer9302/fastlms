@@ -38,7 +38,6 @@ public class SecurityConfiguration{
                         .requestMatchers("/"
                                 ,"/member/register"
                                 ,"/member/email-auth"
-                                , "/member/login"
                         ).permitAll()
                         .anyRequest().authenticated())
                 .securityMatcher("/**");
