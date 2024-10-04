@@ -134,7 +134,7 @@ public class MemberServiceImpl implements MemberService {
         member.setResetPasswordLimitDt(null);
         memberRepository.save(member);
 
-        return false;
+        return true;
     }
 
     @Override
