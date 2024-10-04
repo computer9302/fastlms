@@ -119,8 +119,19 @@ public class MemberServiceImpl implements MemberService {
 
         Member member = optionalMember.get();
 
+        // 초기화 날짜가 유효한지 체크
+        if(member.getResetPasswordLimitDt() == null){
+            throw new RuntimeException("유효한 날짜가 아닙니다.");
+        }
+
+        if (member.getResetPasswordLimitDt().isBefore(LocalDateTime.now())){
+            throw new RuntimeException("유효한 날짜가 아닙니다.");
+        }
+
         String encPassword = BCrypt.hashpw(password, BCrypt.gensalt());
         member.setPassword(encPassword);
+        member.setResetPasswordKey("");
+        member.setResetPasswordLimitDt(null);
         memberRepository.save(member);
 
         return false;

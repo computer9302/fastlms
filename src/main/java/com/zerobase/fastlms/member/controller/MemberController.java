@@ -98,11 +98,15 @@ public String memberInfo(){
     @PostMapping("/member/reset/password")
     public String resetPasswordSubmit(Model model, ResetPasswordInput parameter){
 
-        boolean result = memberService.resetPassword(parameter.getId(), parameter.getPassword());
+        boolean result = false;
+        try {
+            result = memberService.resetPassword(parameter.getId(), parameter.getPassword());
+        }catch (Exception e){
 
-        model.addAttribute("parameter", parameter);
+        }
+        model.addAttribute("result", result);
 
-        return "member/reset_password";
+        return "member/reset_password_result";
     }
 
 
