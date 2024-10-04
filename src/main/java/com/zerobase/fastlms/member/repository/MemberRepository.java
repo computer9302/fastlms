@@ -7,7 +7,10 @@ import org.springframework.stereotype.Repository;
 import java.util.Optional;
 
 @Repository
-public interface MemberRepository extends JpaRepository<Member, String> {
+public interface
+MemberRepository extends JpaRepository<Member, String> {
 
     Optional<Member> findAllByEmailAuthKey(String emailAuthKey);
+    Optional<Member> findByUserIdAndUserName(String userId, String userName);
+    Optional<Member> findByResetPasswordKey(String resetPasswordKey);
 }

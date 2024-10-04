@@ -2,6 +2,7 @@ package com.zerobase.fastlms.member.controller;
 
 import com.zerobase.fastlms.member.entity.Member;
 import com.zerobase.fastlms.member.model.MemberInput;
+import com.zerobase.fastlms.member.model.ResetPasswordInput;
 import com.zerobase.fastlms.member.service.MemberService;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
@@ -24,6 +25,25 @@ public class MemberController {
     @RequestMapping("/member/login")
     public String login() {
         return "member/login";
+    }
+
+    @GetMapping("/member/find-password")
+    public String findPassword(){
+        return "member/find_password";
+    }
+
+    @PostMapping("/member/find-password")
+    public String findPasswordSubmit(Model model, ResetPasswordInput parameter){
+
+        boolean result = false;
+        try {
+            result = memberService.sendResetPassword(parameter);
+        }catch (Exception e){
+
+        }
+        model.addAttribute("result", result);
+
+        return "member/find_password_result";
     }
 
     @GetMapping("/member/register")
@@ -64,6 +84,26 @@ public String memberInfo(){
 
         return "member/info";
 }
+
+    @GetMapping("/member/reset/password")
+    public String resetPassword(Model model, HttpServletRequest request){
+
+        String uuid = request.getParameter("id");
+        model.addAttribute("uuid", uuid);
+
+
+        return "member/reset_password";
+    }
+
+    @PostMapping("/member/reset/password")
+    public String resetPasswordSubmit(Model model, ResetPasswordInput parameter){
+
+        boolean result = memberService.resetPassword(parameter.getId(), parameter.getPassword());
+
+        model.addAttribute("parameter", parameter);
+
+        return "member/reset_password";
+    }
 
 
 }
