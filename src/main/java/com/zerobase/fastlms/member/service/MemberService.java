@@ -6,6 +6,11 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 
 public interface MemberService extends UserDetailsService {
 
+    /*
+
+    parameter를 db에 저장한다.
+     */
+
     boolean register(MemberInput parameter);
 
     /*
@@ -20,7 +25,7 @@ public interface MemberService extends UserDetailsService {
     boolean sendResetPassword(ResetPasswordInput parameter);
 
     /*
-    * 입력받은 uuid에 대해서 password로 초기화 함.
+     입력받은 uuid에 대해서 password로 초기화 함.
     * */
     boolean resetPassword(String uuid, String password);
 }

@@ -9,7 +9,7 @@ import org.springframework.security.web.authentication.SimpleUrlAuthenticationFa
 
 import java.io.IOException;
 import java.net.URLEncoder;
-
+// 로그인에 실패했을시 콘솔과 웹화면에 메세지를 띄워주는 클래스
 public class UserAuthenticationFailureHandler extends SimpleUrlAuthenticationFailureHandler {
 
     @Override

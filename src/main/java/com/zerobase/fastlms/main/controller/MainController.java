@@ -10,13 +10,14 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import java.io.IOException;
 import java.io.PrintWriter;
-
+// 웹에서 들어오는 요청을 받아주는 컨트롤러 클래스
 @RequiredArgsConstructor
 @Controller
 public class MainController {
 
     private final MailComponents mailComponents;
 
+    // 홈페이지로 접속햇을때 email로 subject, text로 구성된 메일이 보내지게끔 하는 함수이다.
     @RequestMapping("/")
     public String index(){
 
@@ -29,6 +30,7 @@ public class MainController {
         return "index";
     }
 
+    // /hello 경로로 들어왔을때 요청을 처리해주는 함수이다.
     @RequestMapping("/hello")
     public void hello(HttpServletRequest request, HttpServletResponse response) throws IOException {
 

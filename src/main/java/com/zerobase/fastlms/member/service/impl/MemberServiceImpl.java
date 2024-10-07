@@ -66,6 +66,11 @@ public class MemberServiceImpl implements MemberService {
         return true;
     }
 
+    /*
+
+    이메일 인증
+     */
+
     @Override
     public boolean emailAuth(String uuid) {
 
@@ -81,6 +86,11 @@ public class MemberServiceImpl implements MemberService {
 
         return true;
     }
+
+    /*
+    비밀번호 초기화 요청
+
+     */
 
     @Override
     public boolean sendResetPassword(ResetPasswordInput parameter) {
@@ -109,6 +119,11 @@ public class MemberServiceImpl implements MemberService {
         return true;
     }
 
+
+    /*
+
+    비밀번호 재설정
+     */
     @Override
     public boolean resetPassword(String uuid, String password) {
 
@@ -137,6 +152,11 @@ public class MemberServiceImpl implements MemberService {
         return true;
     }
 
+    /*
+
+    기능하지 않는 메소드, 하지만 수정하면 다른곳에서 문제가 발생할 수도 있다고 판단해서 제거하지 않는다.
+    검토 시간 부족
+     */
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
 
